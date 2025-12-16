@@ -1,0 +1,8 @@
+{
+  "label": "4. Digital Twin Simulation (Gazebo + Isaac)",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Concepts of Digital Twin Simulation with Gazebo and Isaac."
+  }
+}

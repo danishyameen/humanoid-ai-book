@@ -1,0 +1,30 @@
+# Node.js/TypeScript
+node_modules/
+dist/
+build/
+.env*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+dist/
+*.egg-info/
+.pytest_cache/
+
+# General
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
+*.log
+*.log.*

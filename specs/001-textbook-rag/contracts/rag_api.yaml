@@ -1,0 +1,74 @@
+openapi: 3.0.0
+info:
+  title: RAG Chatbot API
+  version: 1.0.0
+  description: API for interacting with the RAG chatbot to query textbook content.
+paths:
+  /rag/query:
+    post:
+      summary: Submit a query to the RAG chatbot
+      description: Sends a natural language question, optionally with selected text context, to the RAG chatbot and receives an answer.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: The user's natural language question.
+                  example: "What are the basics of ROS 2?"
+                context:
+                  type: string
+                  nullable: true
+                  description: Optional text selected by the user to provide additional context for the query.
+                  example: "ROS 2 is a flexible framework..."
+      responses:
+        '200':
+          description: Successful response from the RAG chatbot.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - answer
+                  - query_id
+                properties:
+                  answer:
+                    type: string
+                    description: The generated answer from the RAG system.
+                    example: "ROS 2 basics include its graph architecture, nodes, topics, services, and actions..."
+                  references:
+                    type: array
+                    description: List of textbook sections/pages referenced in the answer.
+                    items:
+                      type: string
+                    example: ["Chapter 3: ROS 2 Fundamentals, Section 1", "Chapter 3: ROS 2 Fundamentals, Section 2"]
+                  query_id:
+                    type: string
+                    format: uuid
+                    description: Unique identifier for the processed query.
+                    example: "a1b2c3d4-e5f6-7890-1234-567890abcdef"
+        '400':
+          description: Bad Request - e.g., missing query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Query text cannot be empty."
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "An unexpected error occurred."
